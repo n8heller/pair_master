@@ -1,0 +1,14 @@
+/server.log
+/participants.db
+
+*.pyc
+
+/.psiturk_history
+
+/static/images/2kfaces
+/static/images/2kfaces/*
+/static/images/EclipseFace/
+/static/images/EclipseFace/*
+/linzyliTest1.db
+
+*.DS_Store

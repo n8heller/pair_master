@@ -1,0 +1,38 @@
+    }
+
+    /* create experiment definition array */
+
+    var experiment = [];
+    experiment.push(face_images_explore_ready_block);
+    experiment.push(face_example_chunk);
+    experiment.push(instruction_doublet_chunk);
+    experiment.push(prac_no_inst_doublet_block);
+    experiment.push(test_ready_block);
+    experiment.push(trial_chunk);
+    experiment.push(welcome_survey_new_block);
+    experiment.push(complete_block);
+
+    //start();
+    jsPsych.preloadImages(getAllImages(), start)
+    var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
+
+    /* start the experiment */
+    function start() {
+      jsPsych.init({
+        display_element: $('#jspsych_target'),
+        experiment_structure: experiment,
+        show_progress_bar: true,
+        on_finish: function() {
+            psiturk.saveData({
+                success: function() { 
+                  psiturk.completeHIT(); }
+            });
+        },
+        on_data_update: function(data) {
+            psiturk.recordTrialData(data);
+        }
+      });
+    }
+  </script>
+</html>
+      

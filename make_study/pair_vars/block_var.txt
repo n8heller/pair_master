@@ -1,0 +1,85 @@
+    for ( var i = 0; i< 4; i++){
+      if (i < 2){
+        doublet_stim[i] = [].concat(doublet_stim_f.slice(i*50, i*50+50));
+      }
+      else{
+        doublet_stim[i] = [].concat(doublet_stim_f.slice((i-2)*50, (i-2)*50+50));
+      }
+      doublet_stim[i].push([temp[i],temp[i]]);
+      doublet_stim[i] = jsPsych.randomization.repeat(doublet_stim[i],1);
+    }
+    var test_doublet1_stim = doublet_stim[0];
+    var test_doublet2_stim = doublet_stim[1];
+    var test_doublet3_stim = doublet_stim[2];
+    var test_doublet4_stim = doublet_stim[3];
+
+    //practice with instruction blocks
+    var trial_num = 0;
+    var prac_doublet_block = {
+      type: 'similarity_custom',
+      stimuli: prac_doublet_stim,
+      text: '<div style="text-align: left; margin-top:30px;"> <p>In the <span class = "emp">Face Pair Task</span>, your need to rate how similar a face pair is from <span class="emp">1</span> to <span class="emp">9</sapn>.</p> <p><span class="emp">1</span> indicates <span class="emp">Maximally Dissimilar</span>, <span class="emp">9</span> indicates <span class="emp">Maximally Similar</span></p> <p> If you see two identical faces, please click the <span class="emp">identical</span> button.</p> <p> <em class="emp">Try to focus on the face features and ignore the pose, expression and lighting influence.</em></p></div><br><br>',
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      set_num: 1
+    };
+    trial_num +=1;
+    var instruction_doublet_chunk = {
+        chunk_type: 'while',
+        timeline: [prac_doublet_block,prac1_end_block],
+        continue_function: function(){
+          var back_button = document.getElementById('Back').clicked;
+            $('.well').remove();
+            $('.jspsych-survey-text').remove();
+            if( back_button){
+              return true;
+            }
+            else{
+              return false;
+            } 
+        }
+    };
+   
+    //practice with no instruction blocks
+    var prac_no_inst_doublet_block = {
+      type: 'similarity_custom',
+      stimuli: prac_no_inst_doublet_stim,
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      set_num: 1
+    };
+
+    trial_num +=1;
+    var test_doublet1_block = {
+      type: 'similarity_custom',stimuli: test_doublet1_stim,
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      phase: 1,
+      set_num:setNumber
+    }; 
+      var test_doublet2_block = {
+      type: 'similarity_custom',stimuli: test_doublet2_stim,
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      phase: 2,
+      set_num:setNumber
+    }; 
+      var test_doublet3_block = {
+      type: 'similarity_custom',stimuli: test_doublet3_stim,
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      phase: 3,
+      set_num:setNumber
+    }; 
+      var test_doublet4_block = {
+      type: 'similarity_custom',stimuli: test_doublet4_stim,
+      timing_post_trial: post_trial_gap,
+      trial_num: trial_num,
+      phase: 4,
+      set_num:setNumber
+    }; 
+      
+    var trial_chunk = {
+    chunk_type: 'linear',
+    
+    timeline: [test_doublet1_block,test_doublet2_block,break2_block,test_doublet3_block,test_doublet4_block]
