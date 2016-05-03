@@ -46,6 +46,26 @@
     var adServerLoc = "{{ adServerLoc }}"; // the location of your ad (so you can send user back at end of experiment)
     var mode = "{{ mode }}"; // is this running live, sandbox, or in debug mode?
 
+/*
+    htmlobj = $.ajax({
+      url: "http://132.239.147.47:5150/counter/update_counter.php",
+      async: false,
+      method: "POST",
+      data: { assignmentID: assignmentId, workerID: workerId, hitID: '3'}
+    });
+    console.log('Updated counter: ' + htmlobj.responseText);
+
+
+    htmlobj = $.ajax({
+      url: "http://132.239.147.47:5150/counter/give_counter.php",
+      async: false,
+      method: "POST",
+      data: { assignmentID: assignmentId, workerID: workerId, hitID: '3'}
+    });
+    var outputCounter = htmlobj.responseText;
+    console.log('Current counter: ' + outputCounter);
+    var counter = parseInt(outputCounter.split(' ')[3]);
+*/
 
         //read a text file
     function readTextFile(file){
@@ -257,8 +277,8 @@
     var counter = 90;
     var setNumber = counter;
     var repNumber = counter%5+1;
-    var doublet_stim_f = readTextFile('https://raw.githubusercontent.com/amandasongmm/filesPublic/master/vicente_pair_jan/HIT'+ setNumber.toString()+'.txt');
-    var prac_doublet_stim_f = readTextFile("https://raw.githubusercontent.com/amandasongmm/filesPublic/master/vicente_pair_jan/HIT1.txt");
+    var doublet_stim_f = readTextFile("http://132.239.147.47:5150/static/images/test_img_lists/pair_set" + setNumber.toString() + ".txt");
+    var prac_doublet_stim_f = readTextFile("http://132.239.147.47:5150/static/images/test_img_lists/practice_img.txt");
 
 
     function getAllImages() {
